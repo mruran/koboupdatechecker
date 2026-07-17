@@ -13,6 +13,7 @@ Thumbs.db
 *.zip
 releases/
 build/
+screens/
 
 # Node/NPM
 node_modules/
