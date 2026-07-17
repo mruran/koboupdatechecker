@@ -1,0 +1,90 @@
+{
+    "extName": {
+        "message": "Kobo Update Checker｜電子書籍アップデート確認"
+    },
+    "extShortName": {
+        "message": "Kobo アップデート確認"
+    },
+    "extDesc": {
+        "message": "所有している電子書籍のアップデートが利用可能かどうかを確認します。"
+    },
+    "headerMessage": {
+        "message": "メッセージ"
+    },
+    "btnOkay": {
+        "message": "OK"
+    },
+    "btnCheckPage": {
+        "message": "このページのアップデートを確認"
+    },
+    "btnCheckingPage": {
+        "message": "確認中..."
+    },
+    "btnCheckSingle": {
+        "message": "アップデートを確認"
+    },
+    "btnCopyOutdated": {
+        "message": "古い書籍をコピー"
+    },
+    "statusPending": {
+        "message": "待機中..."
+    },
+    "statusChecking": {
+        "message": "確認中..."
+    },
+    "statusLatest": {
+        "message": "最新"
+    },
+    "statusOutdated": {
+        "message": "アップデートあり"
+    },
+    "statusPreview": {
+        "message": "プレビュー"
+    },
+    "statusSkipped": {
+        "message": "スキップ"
+    },
+    "statusFailed": {
+        "message": "失敗"
+    },
+    "errUnlisted": {
+        "message": "この書籍は非公開になったため、現在この種類の書籍のアップデートを確認する方法がありません。"
+    },
+    "errParsing": {
+        "message": "最新の製品IDを解析できませんでした。詳細については開発者にお問い合わせください。"
+    },
+    "errUnknown": {
+        "message": "不明なエラーが発生しました。詳細については開発者にお問い合わせください。"
+    },
+    "msgFinished": {
+        "message": "このページのすべての書籍の確認が完了しました。\n\n最新：$1\nアップデートあり：$2\nスキップ：$3\n失敗：$4",
+        "placeholders": {
+            "1": {
+                "content": "$1"
+            },
+            "2": {
+                "content": "$2"
+            },
+            "3": {
+                "content": "$3"
+            },
+            "4": {
+                "content": "$4"
+            }
+        }
+    },
+    "msgNoChecked": {
+        "message": "確認された書籍はありません。"
+    },
+    "msgNoOutdated": {
+        "message": "アップデートがある書籍はありません。"
+    },
+    "msgCopied": {
+        "message": "$1 冊の書籍をクリップボードにコピーしました。",
+        "placeholders": {
+            "1": {
+                "content": "$1"
+            }
+        }
+    }
+}

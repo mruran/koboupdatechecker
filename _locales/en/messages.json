@@ -1,0 +1,90 @@
+{
+    "extName": {
+        "message": "Kobo Update Checker: Track e-Book Updates"
+    },
+    "extShortName": {
+        "message": "Kobo Updater"
+    },
+    "extDesc": {
+        "message": "Checks if updates are available for the e-books you own."
+    },
+    "headerMessage": {
+        "message": "Message"
+    },
+    "btnOkay": {
+        "message": "Okay"
+    },
+    "btnCheckPage": {
+        "message": "Check Update for Page"
+    },
+    "btnCheckingPage": {
+        "message": "Checking Update..."
+    },
+    "btnCheckSingle": {
+        "message": "Check Update"
+    },
+    "btnCopyOutdated": {
+        "message": "Copy Outdated Books"
+    },
+    "statusPending": {
+        "message": "Pending..."
+    },
+    "statusChecking": {
+        "message": "Checking..."
+    },
+    "statusLatest": {
+        "message": "Latest"
+    },
+    "statusOutdated": {
+        "message": "Outdated"
+    },
+    "statusPreview": {
+        "message": "Preview"
+    },
+    "statusSkipped": {
+        "message": "Skipped"
+    },
+    "statusFailed": {
+        "message": "Failed"
+    },
+    "errUnlisted": {
+        "message": "This book was unlisted, there’s no way to check update for this type of books at the moment."
+    },
+    "errParsing": {
+        "message": "Failed to parse the latest product ID, please contact the developer for further investigations."
+    },
+    "errUnknown": {
+        "message": "Unknown error, please contact the developer for further investigations."
+    },
+    "msgFinished": {
+        "message": "Finished checking all books for this page.\n\nLatest: $1\nOutdated: $2\nSkipped: $3\nFailed: $4",
+        "placeholders": {
+            "1": {
+                "content": "$1"
+            },
+            "2": {
+                "content": "$2"
+            },
+            "3": {
+                "content": "$3"
+            },
+            "4": {
+                "content": "$4"
+            }
+        }
+    },
+    "msgNoChecked": {
+        "message": "No books have been checked."
+    },
+    "msgNoOutdated": {
+        "message": "No books were outdated."
+    },
+    "msgCopied": {
+        "message": "Copied $1 book(s) into the clipboard.",
+        "placeholders": {
+            "1": {
+                "content": "$1"
+            }
+        }
+    }
+}
