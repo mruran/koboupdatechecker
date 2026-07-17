@@ -57,21 +57,7 @@
         "message": "Unknown error, please contact the developer for further investigations."
     },
     "msgFinished": {
-        "message": "Finished checking all books for this page.\n\nLatest: $1\nOutdated: $2\nSkipped: $3\nFailed: $4",
-        "placeholders": {
-            "1": {
-                "content": "$1"
-            },
-            "2": {
-                "content": "$2"
-            },
-            "3": {
-                "content": "$3"
-            },
-            "4": {
-                "content": "$4"
-            }
-        }
+        "message": "Finished checking all books for this page.\n\nLatest: $1\nOutdated: $2\nSkipped: $3\nFailed: $4"
     },
     "msgNoChecked": {
         "message": "No books have been checked."
@@ -80,11 +66,6 @@
         "message": "No books were outdated."
     },
     "msgCopied": {
-        "message": "Copied $1 book(s) into the clipboard.",
-        "placeholders": {
-            "1": {
-                "content": "$1"
-            }
-        }
+        "message": "Copied $1 book(s) into the clipboard."
     }
 }

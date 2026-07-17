@@ -57,21 +57,7 @@
         "message": "未知錯誤，請聯絡開發者以進一步調查。"
     },
     "msgFinished": {
-        "message": "完成檢查本頁的書籍。\n\n最新：$1\n過時：$2\n已略過：$3\n檢查失敗：$4",
-        "placeholders": {
-            "1": {
-                "content": "$1"
-            },
-            "2": {
-                "content": "$2"
-            },
-            "3": {
-                "content": "$3"
-            },
-            "4": {
-                "content": "$4"
-            }
-        }
+        "message": "完成檢查本頁的書籍。\n\n最新：$1\n過時：$2\n已略過：$3\n檢查失敗：$4"
     },
     "msgNoChecked": {
         "message": "沒有已檢查的書籍。"
@@ -80,11 +66,6 @@
         "message": "沒有過時的書籍。"
     },
     "msgCopied": {
-        "message": "已複製 $1 本書到剪貼簿。",
-        "placeholders": {
-            "1": {
-                "content": "$1"
-            }
-        }
+        "message": "已複製 $1 本書到剪貼簿。"
     }
 }

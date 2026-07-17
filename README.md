@@ -1,11 +1,12 @@
 # Kobo Update Checker
 
-A lightweight, modern Chrome Extension (Manifest V3) that helps you easily check if there are updates available for your purchased e-books on the Kobo website.
+A lightweight Chrome Extension (Manifest V3) that helps you check if there are updates available for your purchased e-books on the Kobo website.
 
 ## ✨ Features
 
+- **Manual Trigger**: Click the extension icon in the toolbar to activate — zero background resource consumption until you need it.
 - **One-Click Check**: Instantly check all e-books on the current Kobo library page for available updates.
-- **Modern & Secure**: Built using Manifest V3 standards with safe DOM node injection (XSS-proof) and optimized MutationObserver handling.
+- **Modern & Secure**: Built using Manifest V3 standards with pure DOM node construction (no `innerHTML`) and idempotent injection guard.
 - **Multilingual Support**: Fully localized in English, Traditional Chinese, Japanese, and Korean.
 - **Bulk Export**: Easily copy the titles of all outdated books to your clipboard with a single click.
 - **Sleek UI**: Minimalist, non-intrusive UI that blends perfectly with Kobo's design aesthetics.
@@ -21,7 +22,7 @@ Since this extension is not yet published to the Chrome Web Store, you can easil
 3. Enable **Developer mode** in the top right corner.
 4. Click **Load unpacked** (載入未封裝項目).
 5. Select the `koboupdatechecker` directory.
-6. The extension is now installed! Navigate to your Kobo "My Books" page to see it in action.
+6. The extension is now installed! Navigate to your Kobo "My Books" page and click the extension icon to activate.
 
 ## 🛠️ Tech Stack
 

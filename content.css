@@ -1,0 +1,42 @@
+.library-container .update-container { text-align: right; }
+.library-container .update-controls { min-width: 13rem; width: auto; }
+.library-container .update-button {
+    border-radius: 8px; min-width: 0; max-width: 100%; width: auto;
+    padding: 8px 16px;
+    background-color: #f8f9fa; color: #333;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    font-size: 1.5rem; font-family: "Inter", "Rakuten Sans UI", "Trebuchet MS", sans-serif;
+    font-weight: 500; text-align: center; text-overflow: ellipsis;
+    position: relative; white-space: nowrap; cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+.library-container .update-button:not(:first-child) { margin-left: 8px; }
+.library-container .update-button:hover {
+    background-color: #fff;
+    border-color: #ced4da;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+}
+.library-container .update-button:active {
+    background-color: #e9ecef;
+    transform: translateY(0);
+    box-shadow: none;
+}
+.library-container .update-button:disabled {
+    background-color: #e9ecef; color: #adb5bd; border-color: #e9ecef; pointer-events: none;
+}
+
+@media (max-width: 568px) {
+    .library-container .secondary-controls { margin-right: 18px; }
+    .library-container .update-container { margin-bottom: 1.5rem; width: 100%; display: flex; flex-direction: column; text-align: left; }
+    .library-container .update-controls { margin-right: 0; width: 100%; white-space: break-spaces; }
+    .library-container .update-button { margin-left: 0 !important; margin-right: 0 !important; width: 100%; text-align: center; }
+    .library-container .update-button:not(:first-child) { margin-top: 8px; }
+    .library-container .library-content.grid .more-actions:not(.open) { width: fit-content; transform: translateY(35px); }
+}
+
+.item-wrapper.book[data-check-status=outdated] .product-field.item-status { background: #ffe3e3; color: #c92a2a; border-radius: 4px; padding: 2px 6px; font-weight: 500; display: inline-block; }
+.item-wrapper.book[data-check-status=skipped] .product-field.item-status { background: #f1f3f5; color: #495057; border-radius: 4px; padding: 2px 6px; font-weight: 500; display: inline-block; }
+.item-wrapper.book[data-check-status=failed] .product-field.item-status { background: #fff3bf; color: #e67700; border-radius: 4px; padding: 2px 6px; font-weight: 500; display: inline-block; }
+.item-wrapper.book:is([data-check-status=skipped], [data-check-status=failed]) .product-field.item-status a { text-decoration-line: underline; cursor: help; color: inherit; }
