@@ -97,5 +97,14 @@
     },
     "timeDayAgo": {
         "message": "$1 天前"
+    },
+    "msgUpdateHint": {
+        "message": "Kobo 網頁版無法直接更新書籍。請在您的 Kobo 閱讀器或 Kobo App 中執行「同步」來取得最新內容。"
+    },
+    "msgFailedHint": {
+        "message": "無法取得此書籍的最新版本資訊。可能是該書籍已從商店下架，或是網路連線不穩。"
+    },
+    "btnHelp": {
+        "message": "說明"
     }
 }

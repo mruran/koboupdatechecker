@@ -40,13 +40,13 @@ elements.checkBtn.addEventListener("click", async () => {
     elements.checkBtn.disabled = true;
     elements.checkBtn.textContent = chrome.i18n.getMessage("btnCheckingPage");
 
-    await chrome.scripting.insertCSS({
-        target: { tabId: tab.id },
-        files: ["content.css"],
-    });
-    await chrome.scripting.executeScript({
-        target: { tabId: tab.id },
-        files: ["content.js"],
+    chrome.tabs.sendMessage(tab.id, { action: "checkPage" }, (response) => {
+        // If content script is not loaded or other error, fallback to resetting button
+        if (chrome.runtime.lastError) {
+            console.error(chrome.runtime.lastError);
+            elements.checkBtn.disabled = false;
+            elements.checkBtn.textContent = chrome.i18n.getMessage("popupCheckBtn");
+        }
     });
 
     setTimeout(() => {

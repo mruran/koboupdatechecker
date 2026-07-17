@@ -97,5 +97,14 @@
     },
     "timeDayAgo": {
         "message": "$1일 전"
+    },
+    "msgUpdateHint": {
+        "message": "Kobo 웹사이트에서는 직접 업데이트를 지원하지 않습니다. 최신 버전을 받으려면 Kobo e-reader 또는 Kobo 앱을 동기화하세요."
+    },
+    "msgFailedHint": {
+        "message": "최신 버전 정보를 가져오지 못했습니다. 도서가 판매 중단되었거나 네트워크 문제일 수 있습니다."
+    },
+    "btnHelp": {
+        "message": "도움말"
     }
 }

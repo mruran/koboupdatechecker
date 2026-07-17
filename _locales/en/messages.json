@@ -97,5 +97,14 @@
     },
     "timeDayAgo": {
         "message": "$1 day(s) ago"
+    },
+    "msgUpdateHint": {
+        "message": "The Kobo website does not support direct updates. Please sync your Kobo e-reader or Kobo App to receive the latest version."
+    },
+    "msgFailedHint": {
+        "message": "Failed to retrieve the latest version info. The book might be delisted, or there might be a network issue."
+    },
+    "btnHelp": {
+        "message": "Help / Info"
     }
 }

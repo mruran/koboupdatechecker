@@ -35,8 +35,11 @@
                 chrome.i18n.getMessage("msgFinished", [String(latest), String(outdated), String(skipped), String(failed)]),
             NO_BOOKS_BEEN_CHECKED: chrome.i18n.getMessage("msgNoChecked"),
             NO_BOOKS_WERE_OUTDATED: chrome.i18n.getMessage("msgNoOutdated"),
-            COPIED_BOOKS: (num) => chrome.i18n.getMessage("msgCopied", [String(num)])
-        }
+            COPIED_BOOKS: (num) => chrome.i18n.getMessage("msgCopied", [String(num)]),
+            UPDATE_HINT: chrome.i18n.getMessage("msgUpdateHint"),
+            FAILED_HINT: chrome.i18n.getMessage("msgFailedHint")
+        },
+        HELP: chrome.i18n.getMessage("btnHelp")
     };
 
     // 2. 內建輕量化非同步佇列系統 (取代外部 queue.js)
@@ -312,19 +315,48 @@
         throw new Error(LL.ERROR.PARSING);
     }
 
+    function getStatusBadge(messageEl) {
+        let badge = messageEl.querySelector(".kobo-update-status");
+        if (!badge) {
+            badge = document.createElement("span");
+            badge.className = "kobo-update-status";
+            badge.style.marginLeft = "8px";
+            messageEl.appendChild(badge);
+        }
+        return badge;
+    }
+
+    function createHelpButton(hintMessage) {
+        const btn = document.createElement("button");
+        btn.textContent = "[?]";
+        btn.title = LL.HELP;
+        btn.style.marginLeft = "4px";
+        btn.style.background = "none";
+        btn.style.border = "none";
+        btn.style.color = "inherit";
+        btn.style.cursor = "pointer";
+        btn.style.opacity = "0.7";
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            showModal(hintMessage);
+        });
+        return btn;
+    }
+
     function checkUpdate(book) {
         return queue.add(async () => {
             const message = book.querySelector(".product-field.item-status");
             if (!message) return;
 
             const title = getBookTitle(book);
+            const badge = getStatusBadge(message);
             book.dataset.checkStatus = Status.CHECKING;
-            message.textContent = LL.STATUS.CHECKING;
+            badge.textContent = `[${LL.STATUS.CHECKING}]`;
 
             if (book.dataset.koboGizmo === "PreviewLibraryItem") {
                 book.dataset.checkStatus = Status.SKIPPED;
-                message.classList.remove("buy-now");
-                message.replaceChildren(LL.STATUS.PREVIEW);
+                badge.replaceChildren(`[${LL.STATUS.PREVIEW}]`);
                 saveCheckResult(title, Status.SKIPPED);
                 return;
             }
@@ -338,7 +370,7 @@
 
                 if (currentId === latestId) {
                     book.dataset.checkStatus = Status.LATEST;
-                    message.replaceChildren(LL.STATUS.LATEST);
+                    badge.replaceChildren(`[${LL.STATUS.LATEST}]`);
                     saveCheckResult(title, Status.LATEST);
                 } else {
                     book.dataset.checkStatus = Status.OUTDATED;
@@ -346,25 +378,43 @@
                         const link = document.createElement("a");
                         link.href = storeUrl;
                         link.target = "_blank";
-                        link.textContent = LL.STATUS.OUTDATED;
+                        link.textContent = `[${LL.STATUS.OUTDATED} ↗]`;
                         link.style.color = "inherit";
-                        message.replaceChildren(link);
+                        badge.replaceChildren(link);
                     } else {
-                        message.replaceChildren(LL.STATUS.OUTDATED);
+                        badge.replaceChildren(`[${LL.STATUS.OUTDATED}]`);
                     }
+                    badge.appendChild(createHelpButton(LL.MESSAGE.UPDATE_HINT));
                     saveCheckResult(title, Status.OUTDATED, storeUrl);
                 }
             } catch (e) {
                 book.dataset.checkStatus = Status.FAILED;
                 const link = document.createElement("a");
-                link.textContent = LL.STATUS.FAILED;
+                link.textContent = `[${LL.STATUS.FAILED}]`;
+                link.style.cursor = "pointer";
                 link.addEventListener("click", () => showModal(e.message));
-                message.replaceChildren(link);
+                badge.replaceChildren(link);
+                badge.appendChild(createHelpButton(LL.MESSAGE.FAILED_HINT));
                 saveCheckResult(title, Status.FAILED);
             }
         });
     }
 
     window.__koboUpdateCheckerInit = init;
-    init();
+    
+    // Auto-poll to inject buttons on dynamically loaded books
+    setInterval(init, 1500);
+
+    // Listen for messages from popup.js
+    chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+        if (request.action === "checkPage") {
+            const checkButton = document.querySelector(".update-button");
+            const allBooks = Array.from(document.querySelectorAll(".item-wrapper.book"));
+            if (checkButton && allBooks.length > 0) {
+                checkUpdateForBooks(allBooks, checkButton);
+            }
+            sendResponse({ success: true });
+        }
+        return true;
+    });
 })();
