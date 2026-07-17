@@ -67,5 +67,35 @@
     },
     "msgCopied": {
         "message": "$1권의 도서를 클립보드에 복사했습니다."
+    },
+    "popupTitle": {
+        "message": "Kobo 업데이트 확인"
+    },
+    "popupCheckBtn": {
+        "message": "이 페이지 확인"
+    },
+    "popupClearBtn": {
+        "message": "지우기"
+    },
+    "popupNoHistory": {
+        "message": "확인 기록이 없습니다.\nKobo 라이브러리로 이동하여 \"이 페이지 확인\"을 클릭하세요."
+    },
+    "popupNotKobo": {
+        "message": "Kobo 페이지가 아닙니다"
+    },
+    "popupViewUpdate": {
+        "message": "스토어에서 보기"
+    },
+    "timeJustNow": {
+        "message": "방금"
+    },
+    "timeMinAgo": {
+        "message": "$1분 전"
+    },
+    "timeHourAgo": {
+        "message": "$1시간 전"
+    },
+    "timeDayAgo": {
+        "message": "$1일 전"
     }
 }

@@ -67,5 +67,35 @@
     },
     "msgCopied": {
         "message": "Copied $1 book(s) into the clipboard."
+    },
+    "popupTitle": {
+        "message": "Kobo Update Checker"
+    },
+    "popupCheckBtn": {
+        "message": "Check This Page"
+    },
+    "popupClearBtn": {
+        "message": "Clear"
+    },
+    "popupNoHistory": {
+        "message": "No check history yet.\nNavigate to your Kobo Library and click \"Check This Page\"."
+    },
+    "popupNotKobo": {
+        "message": "Not a Kobo page"
+    },
+    "popupViewUpdate": {
+        "message": "View in store"
+    },
+    "timeJustNow": {
+        "message": "just now"
+    },
+    "timeMinAgo": {
+        "message": "$1 min ago"
+    },
+    "timeHourAgo": {
+        "message": "$1 hr ago"
+    },
+    "timeDayAgo": {
+        "message": "$1 day(s) ago"
     }
 }

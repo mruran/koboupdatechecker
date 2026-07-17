@@ -74,11 +74,33 @@
         OUTDATED: "outdated", SKIPPED: "skipped", FAILED: "failed",
     };
 
-    // 3. Modal 彈窗與剪貼簿功能 (取代 GM.setClipboard)
+    // 3. 持久化檢查紀錄
+    let checkLog = [];
+
+    async function loadCheckLog() {
+        const stored = await chrome.storage.local.get("checkLog");
+        checkLog = stored.checkLog || [];
+    }
+
+    function saveCheckResult(title, status, storeUrl) {
+        const existing = checkLog.findIndex((e) => e.title === title);
+        const entry = { title, status, checkedAt: new Date().toISOString() };
+        if (storeUrl) entry.storeUrl = storeUrl;
+
+        if (existing >= 0) {
+            checkLog[existing] = entry;
+        } else {
+            checkLog.push(entry);
+        }
+        // Cap at 500 entries
+        if (checkLog.length > 500) checkLog.splice(0, checkLog.length - 500);
+        chrome.storage.local.set({ checkLog });
+    }
+
+    // 4. Modal 彈窗與剪貼簿功能 (取代 GM.setClipboard)
     function showModal(message) {
         if (document.getElementById("kobo-checker-modal")) return;
 
-        // Build modal DOM tree without innerHTML to prevent XSS
         const modal = document.createElement("div");
         modal.id = "kobo-checker-modal";
         modal.classList.add("modal");
@@ -89,14 +111,12 @@
 
         const innerDiv = document.createElement("div");
 
-        // Close button wrapper
         const closeWrapper = document.createElement("div");
         closeWrapper.classList.add("wrapper");
         const closeBtn = document.createElement("button");
         closeBtn.classList.add("modal-x", "close");
         closeWrapper.appendChild(closeBtn);
 
-        // Content wrapper
         const contentWrapper = document.createElement("div");
         contentWrapper.classList.add("wrapper");
         const actionContainer = document.createElement("div");
@@ -132,7 +152,7 @@
         modal.appendChild(modalContent);
 
         function closeModal() {
-            modal.removeAttribute("id"); // Prevent race condition during animation
+            modal.removeAttribute("id");
             document.body.classList.remove("show-modal");
             setTimeout(() => modal.remove(), 250);
         }
@@ -149,7 +169,6 @@
         try {
             await navigator.clipboard.writeText(text);
         } catch (err) {
-            // Fallback
             const textarea = document.createElement("textarea");
             textarea.value = text;
             document.body.appendChild(textarea);
@@ -159,15 +178,14 @@
         }
     }
 
-    // 4. 核心邏輯：初始化
-    function init() {
-        // 僅選取尚未被注入過的書籍節點
-        const books = Array.from(document.querySelectorAll(".item-wrapper.book:not([data-checker-injected='true'])"));
+    // 5. 核心邏輯：初始化
+    async function init() {
+        await loadCheckLog();
 
+        const books = Array.from(document.querySelectorAll(".item-wrapper.book:not([data-checker-injected='true'])"));
         if (books.length === 0) return;
 
         for (const book of books) {
-            // 標記為已處理
             book.dataset.checkerInjected = "true";
 
             const actions = book.querySelector(".item-info + .item-bar .library-actions-list");
@@ -185,7 +203,6 @@
             actions.appendChild(actionContainer);
         }
 
-        // 確保頁面頂部的控制面板只會被注入一次
         const secondaryControls = document.querySelector(".secondary-controls");
         if (secondaryControls && !document.querySelector(".update-container")) {
             const updateContainer = document.createElement("div");
@@ -300,6 +317,7 @@
             const message = book.querySelector(".product-field.item-status");
             if (!message) return;
 
+            const title = getBookTitle(book);
             book.dataset.checkStatus = Status.CHECKING;
             message.textContent = LL.STATUS.CHECKING;
 
@@ -307,11 +325,13 @@
                 book.dataset.checkStatus = Status.SKIPPED;
                 message.classList.remove("buy-now");
                 message.replaceChildren(LL.STATUS.PREVIEW);
+                saveCheckResult(title, Status.SKIPPED);
                 return;
             }
 
             try {
                 const currentId = getCurrentProductId(book);
+                const storeUrl = getStorePageUrl(book);
                 const latestId = await getLatestProductId(book);
 
                 if (!currentId || !latestId) throw new Error(LL.ERROR.PARSING);
@@ -319,9 +339,20 @@
                 if (currentId === latestId) {
                     book.dataset.checkStatus = Status.LATEST;
                     message.replaceChildren(LL.STATUS.LATEST);
+                    saveCheckResult(title, Status.LATEST);
                 } else {
                     book.dataset.checkStatus = Status.OUTDATED;
-                    message.replaceChildren(LL.STATUS.OUTDATED);
+                    if (storeUrl) {
+                        const link = document.createElement("a");
+                        link.href = storeUrl;
+                        link.target = "_blank";
+                        link.textContent = LL.STATUS.OUTDATED;
+                        link.style.color = "inherit";
+                        message.replaceChildren(link);
+                    } else {
+                        message.replaceChildren(LL.STATUS.OUTDATED);
+                    }
+                    saveCheckResult(title, Status.OUTDATED, storeUrl);
                 }
             } catch (e) {
                 book.dataset.checkStatus = Status.FAILED;
@@ -329,11 +360,11 @@
                 link.textContent = LL.STATUS.FAILED;
                 link.addEventListener("click", () => showModal(e.message));
                 message.replaceChildren(link);
+                saveCheckResult(title, Status.FAILED);
             }
         });
     }
 
-    // Expose init for re-injection and run
     window.__koboUpdateCheckerInit = init;
     init();
 })();

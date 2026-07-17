@@ -67,5 +67,35 @@
     },
     "msgCopied": {
         "message": "已複製 $1 本書到剪貼簿。"
+    },
+    "popupTitle": {
+        "message": "Kobo 更新檢查"
+    },
+    "popupCheckBtn": {
+        "message": "檢查本頁"
+    },
+    "popupClearBtn": {
+        "message": "清除"
+    },
+    "popupNoHistory": {
+        "message": "尚無檢查紀錄。\n前往你的 Kobo 書櫃，然後點擊「檢查本頁」。"
+    },
+    "popupNotKobo": {
+        "message": "非 Kobo 頁面"
+    },
+    "popupViewUpdate": {
+        "message": "在商店中查看"
+    },
+    "timeJustNow": {
+        "message": "剛剛"
+    },
+    "timeMinAgo": {
+        "message": "$1 分鐘前"
+    },
+    "timeHourAgo": {
+        "message": "$1 小時前"
+    },
+    "timeDayAgo": {
+        "message": "$1 天前"
     }
 }

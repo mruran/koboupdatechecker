@@ -67,5 +67,35 @@
     },
     "msgCopied": {
         "message": "$1 冊の書籍をクリップボードにコピーしました。"
+    },
+    "popupTitle": {
+        "message": "Kobo アップデート確認"
+    },
+    "popupCheckBtn": {
+        "message": "このページを確認"
+    },
+    "popupClearBtn": {
+        "message": "クリア"
+    },
+    "popupNoHistory": {
+        "message": "確認履歴はまだありません。\nKoboライブラリに移動し、「このページを確認」をクリックしてください。"
+    },
+    "popupNotKobo": {
+        "message": "Koboページではありません"
+    },
+    "popupViewUpdate": {
+        "message": "ストアで見る"
+    },
+    "timeJustNow": {
+        "message": "たった今"
+    },
+    "timeMinAgo": {
+        "message": "$1 分前"
+    },
+    "timeHourAgo": {
+        "message": "$1 時間前"
+    },
+    "timeDayAgo": {
+        "message": "$1 日前"
     }
 }
