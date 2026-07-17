@@ -11,15 +11,12 @@
         "48": "icons/icon-48.png",
         "128": "icons/icon-128.png"
     },
-    "content_scripts": [
-        {
-            "matches": [
-                "*://*.kobo.com/*"
-            ],
-            "js": [
-                "content.js"
-            ],
-            "run_at": "document_idle"
-        }
+    "action": {},
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "activeTab",
+        "scripting"
     ]
 }
